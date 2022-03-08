@@ -2,29 +2,50 @@ class Battle
     def initialize
         @count = 1
         @letter_num_hash = {}
+        @player1score = 0
+        @player2score = 0
+        @score = 0
+        @countsmall = 0.5
     end
 
     def letter_score
         ("A".."Z").each do |letter|
             @letter_num_hash[letter] = @count
             @count = @count + 1
-           
         end
-
-    puts @letter_num_hash
+        ("a".."z").each do |letter|
+            @letter_num_hash[letter] = @countsmall
+            @countsmall = @countsmall + 0.5
+        end
     end
 
     
+    def score(x,y)
+        word1 = x.split("")
+        
+        word1.each do |letter|
+            @player1score = @player1score + @letter_num_hash[letter]
+        end
 
-    # def score(x)
-    #     if x
+        word2 = y.split("")
+        
+        word2.each do |letter|
+            @player2score = @player2score + @letter_num_hash[letter]
+        end 
+    end
 
-    # end
+    def result
+        if @player1score == @player2score
+            return "Tie!"
+        elsif @player1score < @player2score
+            return "Two"
+        else
+            return "One"
+        end
+
+    end
+
 end
-
-battle = Battle.new
-return battle.letter_score
-
 
 # class Abc
 #     def initialize
